@@ -1,0 +1,40 @@
+# Defaults for the legacy single-source pipeline (`run`/`crawl`/`parse`).
+# The multi-subject `harvest` command reads `src/k12_crawler/subjects.py` and
+# takes --subject instead; `run`/`crawl`/`parse` also accept --subject.
+source: cooco
+base_url: http://gzwl.cooco.net.cn
+# The pro. host disallows everything in robots.txt; the gzwl. host serves it.
+list_url: http://gzwl.cooco.net.cn/exam_list_new/gzwl/
+subject_code: gzwl
+subject: 物理
+subject_slug: physics
+stage: 高中
+question_type_filter: 选择题
+
+db_path: data/shared/k12_high_school.sqlite
+# Per-subject paths: the loader switches these to data/<subject_slug>/...
+# (physics, chemistry, ...) when --subject selects another channel.
+raw_dir: data/physics/raw
+image_dir: data/physics/images  # legacy in-tree value; loader maps images to work/images
+export_dir: data/physics
+# Append-only cross-run compliance ledger (papers/questions already accepted).
+ledger_path: data/shared/compliance/ledger.jsonl
+
+timeout: 20
+min_interval: 2.0
+max_retries: 3
+user_agent: "K12Crawler/0.6 (multi-subject educational crawler; polite single-process)"
+
+# Legacy run/parse budgets. The `harvest` command is not governed by these;
+# it takes --max-papers / --max-questions per invocation.
+max_papers: 2
+max_questions: 30
+download_images: true
+
+# Legacy run/parse gate. `harvest` does not read this flag.
+authorized: false
+# Site-wide 2-paper/30-question hard cap for run/crawl/parse. Disabled by
+# default; per-run --max-papers/--max-questions still apply. Set to true to
+# re-enable the compliance guard.
+limits_enabled: false
+compliance_note: "采集遵守 robots.txt 与限速；站点级硬上限默认关闭（limits_enabled=false）。"

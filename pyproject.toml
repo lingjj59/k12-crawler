@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "k12-crawler"
+version = "0.6.1"
+description = "Agent-callable multi-subject K12 crawler: site adapters -> raw HTML + JSONL"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "k12-crawler contributors" }]
+keywords = ["crawler", "education", "k12", "scraper", "cli"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Education",
+]
+dependencies = [
+    "requests>=2.31,<3",
+    "beautifulsoup4>=4.12,<5",
+    "lxml>=5.0,<7",
+    "Pillow>=10.0,<12",
+    "PyYAML>=6.0,<7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0,<9"]
+build = ["pyinstaller>=6.0,<7"]
+
+[project.scripts]
+k12-crawler = "k12_crawler.cli_main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["k12_crawler*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["src/tests"]
+filterwarnings = [
+    "ignore:urllib3 v2 only supports OpenSSL",
+]

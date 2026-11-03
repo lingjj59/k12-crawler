@@ -1,0 +1,848 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  
+  
+  <title>高中物理 >> 最新上传试题列表 -可圈可点题库软件网络版本 cooco.</title>
+  <meta name="Keywords" content="高中物理 >> 最新上传试题列表 -可圈可点题库软件网络版本 cooco." />
+  <meta name="description" content="" />
+  <link rel="stylesheet" type="text/css" href="/static/new_pay/css/main.css?v=">
+  <link rel="stylesheet" type="text/css" href="/static/new_pay/lib/layui/css/layui.css">
+  
+<link rel="stylesheet" type="text/css" href="/static/web_site/css/lessonmain.css?v=">
+<link rel="stylesheet" href="/static/web_site/css/lessonexamlist.css?v=">
+<script>
+  (function () {
+    //路径对应表(废弃)
+    function urlRex(sub){
+      var urlobj = {
+      "lesson_kn":"//"+sub+".cooco.net.cn/testpaper/",     //章节组卷
+      };
+      var winurl = window.location.href;
+      for (const key in urlobj) {
+        if (Object.hasOwnProperty.call(urlobj, key)) {
+          const element = urlobj[key];
+          if(winurl.indexOf(key)!=-1){
+              //跳转对应wap
+              window.location.href = urlobj[key];
+              break;
+          }
+        }
+      }
+    }
+    
+    var _method = {
+      // 设置cookie(当前时间开始计时)
+      setCookie: function (key, val, time, pravite) {
+        var date = new Date();
+        var expiresDays = time ? time : 1;
+        date.setTime(date.getTime() + expiresDays * 24 * 3600 * 1000);
+        // date.setDate(date.getDate() + expiresDays);
+        if (pravite) {
+          document.cookie = key + "=" + escape(val) + ";expires=" + date.toGMTString() + ";path=/";
+        } else {
+          document.cookie = key + "=" + escape(val) + ";expires=" + date.toGMTString() + ";domain=" +
+            DOMAIN_COOKIE + ";path=/";
+        }
+      },
+      // 获取cookie
+      getCookie: function (key) {
+        var getCookie = document.cookie.replace(/[ ]/g, "");
+        var arrCookie = getCookie.split(";")
+        var tips;
+        for (var i = 0; i < arrCookie.length; i++) {
+          var arr = arrCookie[i].split("=");
+          if (key == arr[0]) {
+            tips = arr[1];
+            break;
+          }
+        }
+        return tips;
+      },
+      // 是否移动端
+      isMobile: function () {
+        //return /Mobile/i.test(navigator.userAgent);
+        var sUserAgent= navigator.userAgent.toLowerCase();
+        var bIsIpad= sUserAgent.match(/ipad/i) == "ipad";
+        var bIsIphoneOs= sUserAgent.match(/iphone os/i) == "iphone os";
+        var bIsMidp= sUserAgent.match(/midp/i) == "midp";
+        var bIsUc7= sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+        var bIsUc= sUserAgent.match(/ucweb/i) == "ucweb";
+        var bIsAndroid= sUserAgent.match(/android/i) == "android";
+        var bIsCE= sUserAgent.match(/windows ce/i) == "windows ce";
+        var bIsWM= sUserAgent.match(/windows mobile/i) == "windows mobile";
+        if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+          return true;
+        }else{
+          return false;
+        }
+          
+      }
+    };
+
+    // 判定浏览器和其他环境并跳转
+    function _clientJump(link) {
+      if (_method.getCookie('_fromwap')) {
+        // 从wap跳转至pc
+        return false;
+      } else if (_method.isMobile() && link) {
+        window.location.href = link;
+      }
+    }
+
+    // 暴露
+    window._clientJump = _clientJump;
+  }());
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8815918644127772"
+     crossorigin="anonymous"></script>
+<script type="text/javascript">
+  window._clientJump && window._clientJump("http://mgzwl.cooco.net.cn/")
+</script>
+
+</head>
+
+<body>
+  
+  <!-- 信息 -->
+  <div style="display: none" id="_userInfo" data-uid=""></div>
+  <!-- 信息 end-->
+  <!-- 公共头部 -->
+  <!-- 公共头部 -->
+<div class="m-navHeader pub">
+  <!-- 登录状态 -->
+  <div class="tct gWidth">
+      <div class="logo">可圈可点 -</div>
+      <div class="text">百万题库，名师组卷，专业又权威</div>
+    </a>
+    <div class="right">
+      
+    </div>
+  </div>
+  <!-- 登录状态 end-->
+</div>
+<!-- 公共头部 end-->
+
+  <!-- 公共头部 end-->
+
+  
+<input id="subjectIpt" style="display: none;" type="text" value="gzwl">
+<div id="pageIpt" style="display: none;" data-page="1" data-total="20">/</div>
+
+<!-- 搜索 -->
+<!-- 搜索 -->
+<div class="m-search">
+  <div class="searchGroup gWidth">
+    <a href="http://cooco.net.cn/" class="logo"></a>
+    <!-- 搜索组 -->
+    <div class="searchBox f-f0 layui-form hs2">
+      <select class="select f-ibm" name="city" lay-filter="searchtest">
+        <option value="2">试题</option>
+        <option value="1">试卷</option>
+        <!-- <option value="3">教案</option> -->
+        <option value="4">题库</option>
+        <option value="5">资讯</option>
+        <option value="6">作文</option>
+      </select>
+      <div class="line f-ibm"></div>
+      <input class="searchIpt f-ibm" value="" name="search" type="text" placeholder="搜索14,007,325套精选试卷">
+      <input class="type" style="display: none;" name="type" value="2" type="text">
+      <div class="searchBtn f-ibm f-btn"></div>
+    </div>
+    <!-- 搜索组 end-->
+
+    <a class="searchGoMake" href="http://pro.cooco.net.cn/new_make/gzwl/" target="_blank">我的试题篮</a>
+  </div>
+</div>
+<!-- 搜索 end-->
+
+<!-- 搜索 end-->
+<!-- 导航 -->
+<!-- 导航 -->
+<div class="m-headNav">
+  <div class="navCT">
+    <div class="gWidth f-f0">
+      <div class="dropG f-ibm">
+        <div class="label">当前：高中物理</div>
+        <div class="dropCT f-f0">
+          <div class="item f-ibm">
+            <div class="tit">初中</div>
+            <div class="menus f-f0">
+              
+              <a href="http://czwl.cooco.net.cn/" class="jumpLink f-ibm ">物理</a>
+              
+              <a href="http://czsx.cooco.net.cn/" class="jumpLink f-ibm ">数学</a>
+              
+              <a href="http://czhx.cooco.net.cn/" class="jumpLink f-ibm ">化学</a>
+              
+              <a href="http://czyy.cooco.net.cn/" class="jumpLink f-ibm ">英语</a>
+              
+              <a href="http://czyw.cooco.net.cn/" class="jumpLink f-ibm ">语文</a>
+              
+              <a href="http://czls.cooco.net.cn/" class="jumpLink f-ibm ">历史</a>
+              
+              <a href="http://czsw.cooco.net.cn/" class="jumpLink f-ibm ">生物</a>
+              
+              <a href="http://czdl.cooco.net.cn/" class="jumpLink f-ibm ">地理</a>
+              
+              <a href="http://czzz.cooco.net.cn/" class="jumpLink f-ibm ">政治</a>
+              
+            </div>
+          </div>
+          <div class="line f-ibm"></div>
+          <div class="item f-ibm">
+            <div class="tit">高中</div>
+            <div class="menus f-f0">
+              
+              <a href="http://gzwl.cooco.net.cn/" class="jumpLink f-ibm active">物理</a>
+              
+              <a href="http://gzsx.cooco.net.cn/" class="jumpLink f-ibm ">数学</a>
+              
+              <a href="http://gzhx.cooco.net.cn/" class="jumpLink f-ibm ">化学</a>
+              
+              <a href="http://gzyy.cooco.net.cn/" class="jumpLink f-ibm ">英语</a>
+              
+              <a href="http://gzyw.cooco.net.cn/" class="jumpLink f-ibm ">语文</a>
+              
+              <a href="http://gzls.cooco.net.cn/" class="jumpLink f-ibm ">历史</a>
+              
+              <a href="http://gzsw.cooco.net.cn/" class="jumpLink f-ibm ">生物</a>
+              
+              <a href="http://gzdl.cooco.net.cn/" class="jumpLink f-ibm ">地理</a>
+              
+              <a href="http://gzzz.cooco.net.cn/" class="jumpLink f-ibm ">政治</a>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="navs f-ibm f-f0">
+  <a href="http://cooco.net.cn/" class="navlink f-ibm">首页</a>
+  <a href="http://gzwl.cooco.net.cn/test/" class="navlink f-ibm">章节组卷</a>
+  <a href="http://znzj.cooco.net.cn/?lesson=gzwl" class="navlink f-ibm">智能组卷</a>
+  
+  <a href="http://gzwl.cooco.net.cn/user/newdown/1/" class="navlink f-ibm">找试卷</a>
+  <a href="http://pro.cooco.net.cn/new_exams_list/gzwl/" class="navlink f-ibm">同步测试</a>
+  
+  <a href="http://pro.cooco.net.cn/page_zgk/gzwl/" class="navlink f-ibm">高考</a>
+  <a href="http://cooco.net.cn/question/" class="navlink f-ibm">题库</a>
+    <div class="navlink f-ibm hasDrop">
+      <a href="//czwl.cooco.net.cn/test/" class="link">更多</a>
+      <div class="navDropG">
+        <a href="http://gzwl.cooco.net.cn/zt/" class="dlink f-btn">专题</a>
+        <a href="//cooco.net.cn/article/" class="dlink f-btn">资讯</a>
+        <a href="//czwl.cooco.net.cn/tech/" class="dlink f-btn">教案</a>
+        <a href="//cooco.net.cn/zuowen/" class="dlink f-btn">作文</a>
+      </div>
+    </div>
+  
+</div>
+
+      <!-- 特权介绍入口 -->
+</div>
+<!-- 导航 end-->
+<!-- 导航 end-->
+
+<div class="page-lessonexamlist gWidth">
+  <!-- 面包屑导航 -->
+  <div class="brumbGroup f-f0">
+    <div class="icon f-ibm"></div>
+    <div class="label f-ibm">当前位置：</div>
+    <a class="item f-ibm" href="http://gzwl.cooco.net.cn">学科首页</a>
+    <div class="symbol f-ibm">&gt;</div>
+    <div class="item f-ibm">高中物理</div>
+
+  </div>
+  <!-- 面包屑导航 end-->
+
+  <div class="makeBody">
+    <!-- 分类模块 -->
+    <div class="clsBoxGroup">
+      <!-- 分类 -->
+      <div class="classificationGroup">
+        <div class="row classRow">
+          <div class="label f-fl f-ibm">全部年级：</div>
+          <div class="list f-ibm f-f0">
+            
+            <div class="item f-ibm active" data-id="0">不限制</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="7">高一上学期</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="8">高一下学期</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="9">高二上学期</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="10">高二下学期</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="11">高三上学期</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="12">高三下学期</div>
+            
+            
+          </div>
+        </div>
+        <div class="row typesRow">
+          <div class="label f-fl f-ibm">考试类型：</div>
+          <div class="list f-ibm f-f0">
+            
+            <div class="item f-ibm active" data-id="0">不限制</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="1">开学考试</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="2">月考试卷</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="3">期中考试</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="4">期末考试</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="5">竞赛</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="6">升学考</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="9">同步练习</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="10">单元测试</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="11">专题练习</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="12">高考真题</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="13">高考模拟</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="14">学业考试</div>
+            
+            
+          </div>
+        </div>
+        <div class="row diffRow">
+          <div class="label f-fl f-ibm">试卷难度：</div>
+          <div class="list f-ibm f-f0">
+            
+            <div class="item f-ibm active" data-id="0">不限制</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="1">基础</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="2">容易</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="3">中等</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="4">偏难</div>
+            
+            
+            
+            <div class="item f-ibm" data-id="5">很难</div>
+            
+            
+          </div>
+        </div>
+      </div>
+      <!-- 分类 end-->
+      <!-- 其他分类 -->
+      <div class="otherRow">
+        <div class="f-ibm f-f0 leftBox sortRow">
+          
+          <div class="item f-ibm active icon_filter" data-id="0">最新</div>
+          
+          
+          <div class="item f-ibm icon_filter" data-id="1">最热</div>
+          
+        </div>
+        <div class="f-fr rightBox">
+          <div class="item f-ibm yearBox layui-form">
+            <select class="yearSelect" name="yearsort" lay-filter="yearsort">
+              <option value="0">年份</option>
+              
+              <option value="21">2021</option>
+              
+              <option value="20">2020</option>
+              
+              <option value="19">2019</option>
+              
+              <option value="18">2018</option>
+              
+              <option value="17">2017</option>
+              
+              <option value="16">2016</option>
+              
+              <option value="15">2015</option>
+              
+              <option value="14">2014</option>
+              
+              <option value="13">2013</option>
+              
+              <option value="12">2012</option>
+              
+              <option value="11">2011</option>
+              
+              <option value="10">2010</option>
+              
+              <option value="9">2009</option>
+              
+              <option value="8">2008</option>
+              
+              <option value="7">2007</option>
+              
+              <option value="6">2006</option>
+              
+              <option value="5">2005</option>
+              
+              <option value="4">2004</option>
+              
+              <option value="3">2003</option>
+              
+              <option value="2">2002</option>
+              
+              <option value="1">2001</option>
+              
+            </select>
+          </div>
+          <div class="item f-ibm areaBox layui-form">
+            <select class="areaSelect" name="areasort" lay-filter="areasort">
+              <option value="0">地区</option>
+              
+              <option value="1">北京</option>
+              
+              <option value="2">天津</option>
+              
+              <option value="3">河北</option>
+              
+              <option value="4">山西</option>
+              
+              <option value="5">内蒙古</option>
+              
+              <option value="6">辽宁</option>
+              
+              <option value="7">吉林</option>
+              
+              <option value="8">黑龙江</option>
+              
+              <option value="9">上海</option>
+              
+              <option value="10">江苏</option>
+              
+              <option value="11">浙江</option>
+              
+              <option value="12">安徽</option>
+              
+              <option value="13">福建</option>
+              
+              <option value="14">江西</option>
+              
+              <option value="15">山东</option>
+              
+              <option value="16">河南</option>
+              
+              <option value="17">湖北</option>
+              
+              <option value="18">湖南</option>
+              
+              <option value="19">广东</option>
+              
+              <option value="20">广西</option>
+              
+              <option value="21">海南</option>
+              
+              <option value="22">重庆</option>
+              
+              <option value="23">四川</option>
+              
+              <option value="24">贵州</option>
+              
+              <option value="25">云南</option>
+              
+              <option value="26">西藏</option>
+              
+              <option value="27">陕西</option>
+              
+              <option value="28">甘肃</option>
+              
+              <option value="29">青海</option>
+              
+              <option value="30">宁夏</option>
+              
+              <option value="31">新疆</option>
+              
+              <option value="32">联考</option>
+              
+              <option value="33">香港</option>
+              
+              <option value="34">台湾</option>
+              
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- 其他分类 end-->
+    </div>
+    <!-- 分类模块 end-->
+
+    <!-- 试卷列表 -->
+    <div class="m-examList">
+      
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1688525155/" title="2022年新高考山东物理高考真题含解析">2022年新高考山东物理高考真题含解析</a>
+        <div class="f-ibm subjectNum">共18题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1688525155" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">286次下载</div>
+        <div class="f-fr f-ibm time ite">2023-07-05</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1688093980/" title="2022年新高考湖南物理高考真题含解析">2022年新高考湖南物理高考真题含解析</a>
+        <div class="f-ibm subjectNum">共18题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1688093980" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">187次下载</div>
+        <div class="f-fr f-ibm time ite">2023-06-30</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1688027227/" title="2022年新高考湖北物理高考真题含解析">2022年新高考湖北物理高考真题含解析</a>
+        <div class="f-ibm subjectNum">共16题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1688027227" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">262次下载</div>
+        <div class="f-fr f-ibm time ite">2023-06-29</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1688026561/" title="2022年新高考广东物理高考真题含解析">2022年新高考广东物理高考真题含解析</a>
+        <div class="f-ibm subjectNum">共18题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1688026561" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">178次下载</div>
+        <div class="f-fr f-ibm time ite">2023-06-29</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1688023554/" title="2022年新高考福建物理高考真题含解析">2022年新高考福建物理高考真题含解析</a>
+        <div class="f-ibm subjectNum">共15题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1688023554" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">207次下载</div>
+        <div class="f-fr f-ibm time ite">2023-06-29</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1687942280/" title="2022年新高考海南物理高考真题含解析">2022年新高考海南物理高考真题含解析</a>
+        <div class="f-ibm subjectNum">共17题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1687942280" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">228次下载</div>
+        <div class="f-fr f-ibm time ite">2023-06-28</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1687677412/" title="2022年新高考辽宁物理高考真题含解析">2022年新高考辽宁物理高考真题含解析</a>
+        <div class="f-ibm subjectNum">共15题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1687677412" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">126次下载</div>
+        <div class="f-fr f-ibm time ite">2023-06-25</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1686797797/" title="2022年新高考重庆物理高考真题含解析">2022年新高考重庆物理高考真题含解析</a>
+        <div class="f-ibm subjectNum">共18题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1686797797" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">260次下载</div>
+        <div class="f-fr f-ibm time ite">2023-06-15</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1686713868/" title="2022届江苏省高考物理真题试卷含解析1">2022届江苏省高考物理真题试卷含解析1</a>
+        <div class="f-ibm subjectNum">共15题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1686713868" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">177次下载</div>
+        <div class="f-fr f-ibm time ite">2023-06-14</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1686471529/" title="2022年6月选考浙江物理高考真题含解析">2022年6月选考浙江物理高考真题含解析</a>
+        <div class="f-ibm subjectNum">共21题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1686471529" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">105次下载</div>
+        <div class="f-fr f-ibm time ite">2023-06-11</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1686470481/" title="2022年1月浙江省普通高校招生选考科目考试物理试题含解析">2022年1月浙江省普通高校招生选考科目考试物理试题含解析</a>
+        <div class="f-ibm subjectNum">共23题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1686470481" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">241次下载</div>
+        <div class="f-fr f-ibm time ite">2023-06-11</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1686367015/" title="2022年全国高考甲卷物理真题含解析">2022年全国高考甲卷物理真题含解析</a>
+        <div class="f-ibm subjectNum">共16题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1686367015" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">267次下载</div>
+        <div class="f-fr f-ibm time ite">2023-06-10</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1686292732/" title="2022年高考全国乙卷物理真题含解析">2022年高考全国乙卷物理真题含解析</a>
+        <div class="f-ibm subjectNum">共16题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1686292732" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">257次下载</div>
+        <div class="f-fr f-ibm time ite">2023-06-09</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1686023124/" title="2022年6月选考浙江物理高考真题">2022年6月选考浙江物理高考真题</a>
+        <div class="f-ibm subjectNum">共22题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1686023124" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">289次下载</div>
+        <div class="f-fr f-ibm time ite">2023-06-06</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1685604761/" title="2022年新高考天津物理高考真题">2022年新高考天津物理高考真题</a>
+        <div class="f-ibm subjectNum">共13题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1685604761" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">293次下载</div>
+        <div class="f-fr f-ibm time ite">2023-06-01</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1685503998/" title="2022年新高考北京物理高考真题-">2022年新高考北京物理高考真题-</a>
+        <div class="f-ibm subjectNum">共20题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1685503998" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">239次下载</div>
+        <div class="f-fr f-ibm time ite">2023-05-31</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1669021049/" title="2022-2023学年度高中物理能量守恒律知识点练习题含解析">2022-2023学年度高中物理能量守恒律知识点练习题含解析</a>
+        <div class="f-ibm subjectNum">共35题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1669021049" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">222次下载</div>
+        <div class="f-fr f-ibm time ite">2022-11-21</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1669020990/" title="2022-2023学年度高中物理黑体与黑体辐射知识点练习题含解析">2022-2023学年度高中物理黑体与黑体辐射知识点练习题含解析</a>
+        <div class="f-ibm subjectNum">共35题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1669020990" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">128次下载</div>
+        <div class="f-fr f-ibm time ite">2022-11-21</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1669020900/" title="2022-2023学年度高中物理能量子知识点练习题含解析">2022-2023学年度高中物理能量子知识点练习题含解析</a>
+        <div class="f-ibm subjectNum">共35题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1669020900" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">212次下载</div>
+        <div class="f-fr f-ibm time ite">2022-11-21</div>
+      </div>
+      
+      <div class="item f-f0">
+        <div class="f-ibm img type9"></div>
+        <a class="f-ibm f-btn title f-toe" target="_blank" href="http://gzwl.cooco.net.cn/paper/1669020828/" title="2022-2023学年度高中物理光子说知识点练习题含解析">2022-2023学年度高中物理光子说知识点练习题含解析</a>
+        <div class="f-ibm subjectNum">共35题</div>
+        
+        <div class="f-fr f-ibm download ite" data-host="gzwl" data-id="1669020828" data-subtype="testpaper_1" layui-event="download">下载试卷</div>
+        <div class="f-fr f-ibm count ite">175次下载</div>
+        <div class="f-fr f-ibm time ite">2022-11-21</div>
+      </div>
+      
+      
+    </div>
+    <!-- 试卷列表 end-->
+
+    <!-- 分页 -->
+    
+    <div class="u-pagination"></div>
+    
+    <!-- 分页 end-->
+  </div>
+</div>
+
+
+
+  <!-- 公共底部 -->
+  <!-- 公共底部 -->
+<div class="m-footer">
+  <div class="tct">
+    <div class="gWidth f-f0">
+      <a href="http://cooco.net.cn/" class="lCt f-ibt">
+        <div class="logoImg"></div>
+        <div class="txt">·在线智慧组卷</div>
+      </a>
+      <div class="vLine f-ibt"></div>
+      <div class="mCt f-ibt">
+        <div class="tit">网站简介</div>
+        <div class="txt">
+          可圈可点(cooco.net.cn)，依托于累计十多年、千万量级的初高中题库建成的在线智慧组卷系统，试卷涵盖全国初高中教材版本，试题质量高、更新快，深受广大中学教师喜爱。
+        </div>
+      </div>
+      <div class="rCt f-fr"></div>
+    </div>
+  </div>
+  
+  <div class="copyCT" data-action="11">
+    <div class="gWidth">
+      <div class="p1">Copyright © CooCo.net.cn 2009. All Rights Reserved.</div>
+      <div class="p2 f-f0">
+        <a class="link f-ibm" href="https://beian.miit.gov.cn/" rel="nofollow">网站备案号：闽ICP备2026019586号-1 </a>
+        <div class="p2_line f-ibm"></div>
+        <a class="link f-ibm" target="_blank" href="http://pro.cooco.net.cn/site_in/">版权以及免责申明</a>
+        <div class="p2_line f-ibm"></div>
+        <div class="p2_line f-ibm"></div>
+        <a class="link f-ibm" href="http://pro.cooco.net.cn/user_paper_up/" target="_blank" rel="nofollow">上传试卷</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 公共底部 end-->
+
+  <!-- 公共底部 end-->
+
+  <!-- 右边工具栏 -->
+  <!-- 右边工具栏 -->
+<div class="m-sliderRightTool">
+  <div class="list">
+    <!-- 试题篮 -->
+    <!-- <a href="http://pro.cooco.net.cn/lesson_make/gzwl/" target="_blank" class="item f-btn quesBlue">
+      <div class="icon"></div>
+      <div class="txt f-unselect">试<br />题<br />篮</div>
+    </a> -->
+    
+    <a href="http://pro.cooco.net.cn/new_make/gzwl/" target="_blank" class="item f-btn quesBlue">
+      <div class="icon"></div>
+      <div class="txt f-unselect">试<br />题<br />篮</div>
+      <div class="num">0</div>
+    </a>
+    
+    <!-- 试题篮 end-->
+    <div class="line white linequesBlue"></div>
+    <!-- 使用指南 -->
+    <a href="http://pro.cooco.net.cn/site_help/" target="_blank" class="item guide">
+      <div class="icon"></div>
+      <div class="txt f-unselect">使用<br />说明</div>
+    </a>
+    <!-- 使用指南 end-->
+    <div class="line lineguide"></div>
+    <!-- 收藏 -->
+    <div class="item fav">
+      <div class="icon"></div>
+      <div class="txt f-unselect">收藏</div>
+      <div class="content">
+        <div class="link"></div>
+      </div>
+    </div>
+    <!-- 收藏 end-->
+    <div class="line linefav"></div>
+    <!-- 领福利 -->
+    
+    <!-- 领福利 end-->
+    <div class="line linegif"></div>
+  </div>
+  <!-- 置顶 -->
+  <div class="item goTop f-btn" layui-event="scrollToTop">
+    <div class="icon"></div>
+  </div>
+  <!-- 置顶 end-->
+  <!-- 侧边组卷蓝 -->
+  
+  <!-- 侧边组卷蓝 end-->
+</div>
+<!-- 右边工具栏 end-->
+
+  <!-- 右边工具栏 end-->
+  <!-- 左侧299入口 -->
+  <script src="/static/new_pay/js/jquery.min.js"></script>
+  <script src="/static/new_pay/lib/layui/layui.all.js"></script>
+  
+  
+  <script src="/static/new_pay/js/main.js?v="></script>
+  <script src="/static/new_pay/js/draft_socket.js?v="></script>
+  
+<script src="/static/web_site/js/tj.js"></script>
+<script src="/static/web_site/lib/pagination.js?v="></script>
+<script src="/static/web_site/js/lessonexamlist.js?v="></script>
+
+</body>
+
+</html>
