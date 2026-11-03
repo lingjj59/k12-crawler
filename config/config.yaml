@@ -1,6 +1,6 @@
-# Defaults for the legacy single-source pipeline (`run`/`crawl`/`parse`).
-# The multi-subject `harvest` command reads `src/k12_crawler/subjects.py` and
-# takes --subject instead; `run`/`crawl`/`parse` also accept --subject.
+# 默认配置。harvest 主要读取路径、超时、限速和 User-Agent；
+# 下面的 source/base_url 等单源字段保留给旧版接口与统计兼容。
+# 日常抓取用 --site/--subject 指定站点和学科。
 source: cooco
 base_url: http://gzwl.cooco.net.cn
 # The pro. host disallows everything in robots.txt; the gzwl. host serves it.
@@ -25,16 +25,13 @@ min_interval: 2.0
 max_retries: 3
 user_agent: "K12Crawler/0.6 (multi-subject educational crawler; polite single-process)"
 
-# Legacy run/parse budgets. The `harvest` command is not governed by these;
-# it takes --max-papers / --max-questions per invocation.
+# 兼容旧版单源接口的字段；harvest 不读取这些上限。
 max_papers: 2
 max_questions: 30
 download_images: true
 
-# Legacy run/parse gate. `harvest` does not read this flag.
+# 兼容字段；harvest 不读取该开关。
 authorized: false
-# Site-wide 2-paper/30-question hard cap for run/crawl/parse. Disabled by
-# default; per-run --max-papers/--max-questions still apply. Set to true to
-# re-enable the compliance guard.
+# 兼容字段：旧版单源流程的站点级硬上限开关；默认关闭。
 limits_enabled: false
 compliance_note: "采集遵守 robots.txt 与限速；站点级硬上限默认关闭（limits_enabled=false）。"

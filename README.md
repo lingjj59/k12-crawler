@@ -2,9 +2,9 @@
 
 多学科 K12 试题爬虫：把站点适配成统一的 **Site / Unit** 模型，抓取列表、试卷、题目详情或 JSON API 分页，保存原始响应，并输出结构化 JSONL / SQLite。
 
-- 内置站点：百度题库（baidu）、菁优网（jyeoo）、菁优网初中（cooco）
+- 内置站点：百度题库（baidu）、菁优网（jyeoo）、可圈可点（cooco）
 - 学科：高中/初中的物理、化学、数学、生物、语文、英语、地理、历史、政治等
-- 子命令：`sites`、`harvest`、`extract`、`stats`、`export`、`import-items`、`run`、`crawl`、`parse`、`list`
+- 子命令：`sites`、`harvest`、`extract`、`stats`、`export`、`import-items`、`list`
 - 支持断点续跑、限速、去重、状态/台账、字段校验、SQLite 入库
 - 纯 Python，Windows / macOS / Linux 均可运行
 
@@ -75,7 +75,7 @@ k12-crawler harvest --site baidu --subject gzwl --max-units 10 --images --json
 k12-crawler extract --site jyeoo --subject gzhx --url "<paper_url>" --json
 
 # 入库、统计、导出
-k12-crawler import-items --input data/.../items.jsonl --json
+k12-crawler import-items --items data/.../items.jsonl --json
 k12-crawler stats --json
 k12-crawler export --subject gzhx --output data/export/gzhx.jsonl
 ```
@@ -135,6 +135,12 @@ python -m pip install -e ".[dev]"
 python -m pytest -q
 ```
 
+可选的整理/评估脚本在 `src/scripts/`；其中读取 parquet 的脚本需要额外依赖：
+
+```bash
+python -m pip install -e ".[scripts]"
+```
+
 构建 wheel：
 
 ```bash
@@ -156,7 +162,7 @@ pyinstaller packaging\k12-crawler.spec --noconfirm
 ```text
 src/k12_crawler/
 ├── cli_main.py        # 命令行实现（k12-crawler 入口）
-├── cli.py             # console_scripts 入口
+├── cli.py             # 兼容入口（旧代码 from main import main）
 ├── config.py          # 配置与数据根目录
 ├── subjects.py        # 学科目录与路径
 ├── fetcher.py         # HTTP、限速、重试、拦截检测

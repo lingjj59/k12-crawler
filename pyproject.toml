@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "k12-crawler"
-version = "0.6.2"
+version = "0.6.3"
 description = "Agent-callable multi-subject K12 crawler: site adapters -> raw HTML + JSONL"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
-authors = [{ name = "k12-crawler contributors" }]
+authors = [{ name = "cott", email = "228060333+lingjj59@users.noreply.github.com" }]
 keywords = ["crawler", "education", "k12", "scraper", "cli"]
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -29,6 +29,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=8.0,<9"]
 build = ["pyinstaller>=6.0,<7"]
+scripts = ["pyarrow>=15.0,<22"]
 
 [project.scripts]
 k12-crawler = "k12_crawler.cli_main:main"

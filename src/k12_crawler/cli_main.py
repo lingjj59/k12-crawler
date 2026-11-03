@@ -513,14 +513,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             "error_type": type(exc).__name__,
             "error": str(exc),
         }
-        _print_result(result, json_output or args.command in ("run", "crawl", "parse"), args.command)
+        _print_result(result, json_output, args.command)
         return EXIT_BLOCKED
     except KeyboardInterrupt:
         result = {
             "status": "interrupted",
             "error": "interrupted by user; use --resume to continue",
         }
-        _print_result(result, json_output or args.command in ("run", "crawl", "parse"), args.command)
+        _print_result(result, json_output, args.command)
         return EXIT_FAILURE
     except Exception as exc:  # configuration/IO errors, unexpected bugs
         result = {
@@ -528,7 +528,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             "error_type": type(exc).__name__,
             "error": str(exc),
         }
-        _print_result(result, json_output or args.command in ("run", "crawl", "parse"), args.command)
+        _print_result(result, json_output, args.command)
         return EXIT_FAILURE
 
     _print_result(result, json_output, args.command)
