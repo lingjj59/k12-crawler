@@ -32,13 +32,17 @@ k12-crawler.bat harvest --site jyeoo --subject gzhx --max-units 5 --out data\try
 
 ### 方式 B：下载单文件 exe（不需要 Python）
 
-打开仓库的 **Releases** 页面，下载 `k12-crawler-windows-x64.zip`，解压后双击 `k12-crawler.exe`，或在命令行使用：
+直接下载最新版：[k12-crawler-windows-x64.zip](https://github.com/lingjj59/k12-crawler/releases/latest/download/k12-crawler-windows-x64.zip)
+
+也可以在 **Releases** 页面手动选择版本。解压后双击 `k12-crawler.exe`，或在命令行使用：
 
 ```bat
 k12-crawler.exe sites --json
 ```
 
 单文件版的数据写在 `%LOCALAPPDATA%\k12-crawler\data`，不会污染程序目录。Releases 由 GitHub Actions 在 Windows 上构建；如果还没有 Release，请使用方式 A，或按下文自行构建。
+
+> exe 未做代码签名，Windows 可能提示“未知发布者”。确认文件来自本仓库后，可点“更多信息 → 仍要运行”；介意的话请用方式 A 从源码运行。
 
 ## 安装（macOS / Linux / 任意 Python 环境）
 
