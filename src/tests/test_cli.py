@@ -71,6 +71,19 @@ def test_argument_errors_exit_2_and_json(test_config):
     assert completed.returncode == 2
 
 
+def test_json_output_survives_legacy_windows_code_page(test_config):
+    completed = run_cli(
+        test_config,
+        "sites",
+        "--json",
+        env={"PYTHONIOENCODING": "cp1252"},
+    )
+    assert completed.returncode == 0, completed.stderr
+    payload = cli_json(completed)
+    assert payload["status"] == "ok"
+    assert {site["name"] for site in payload["sites"]} == {"baidu", "cooco", "jyeoo"}
+
+
 def test_stats_json_schema(test_config):
     completed = run_cli(test_config, "stats", "--json")
     assert completed.returncode == 0, completed.stderr

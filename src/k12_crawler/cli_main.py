@@ -40,6 +40,22 @@ EXIT_USAGE = 2
 EXIT_BLOCKED = 3
 
 
+def _configure_stdio() -> None:
+    """Keep legacy Windows code pages from crashing on Chinese output.
+
+    ``json.dumps(..., ensure_ascii=False)`` is friendlier on UTF-8 terminals,
+    but a piped Windows process may use cp1252.  Escaping unencodable
+    characters (``\\u4e2d``) keeps the JSON valid instead of raising
+    ``UnicodeEncodeError``.
+    """
+
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(errors="backslashreplace")  # type: ignore[attr-defined]
+        except (AttributeError, ValueError):
+            pass
+
+
 
 class _Parser(argparse.ArgumentParser):
     """Exit 2 for usage errors; emit JSON when --json was requested."""
@@ -475,6 +491,7 @@ def _exit_code(status: Optional[str]) -> int:
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
+    _configure_stdio()
     args_list = list(argv) if argv is not None else sys.argv[1:]
     _Parser.json_requested = "--json" in args_list
     parser = build_parser()

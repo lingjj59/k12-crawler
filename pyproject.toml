@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "k12-crawler"
-version = "0.6.1"
+version = "0.6.2"
 description = "Agent-callable multi-subject K12 crawler: site adapters -> raw HTML + JSONL"
 readme = "README.md"
 requires-python = ">=3.9"

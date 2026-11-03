@@ -47,7 +47,14 @@ USER_AGENT = "K12Harvester/2.0 (agent crawler; polite single-process)"
 
 
 def _log(message: str) -> None:
-    print(message, file=sys.stderr, flush=True)
+    try:
+        print(message, file=sys.stderr, flush=True)
+    except UnicodeEncodeError:
+        encoding = getattr(sys.stderr, "encoding", None) or "ascii"
+        sys.stderr.write(
+            message.encode(encoding, "backslashreplace").decode(encoding) + "\n"
+        )
+        sys.stderr.flush()
 
 
 def _config(subject: Subject, min_interval: float, timeout: float) -> Config:
