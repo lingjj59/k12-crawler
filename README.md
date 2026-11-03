@@ -53,7 +53,7 @@ k12-crawler --help
 也可以直接安装 GitHub 上的版本：
 
 ```bash
-python -m pip install "git+https://github.com/<your-name>/k12-crawler.git"
+python -m pip install "git+https://github.com/lingjj59/k12-crawler.git"
 ```
 
 ## 常用命令
